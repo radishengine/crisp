@@ -211,6 +211,7 @@ for (var i = 2; i < shape.length; i += 6) {
   startx = endx;
   starty = endy;
 }
+shape.push(shape[0], shape[1]);
 
 var vertex_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
