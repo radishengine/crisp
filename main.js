@@ -76,7 +76,7 @@ function vertex(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
   var px = vertices[vertices.length-2], py = vertices[vertices.length-1];
-  var dx = x - px, dy = y - dy;
+  var dx = x - px, dy = y - py;
   console.log(dx, dy);
   vertices.push(x, y);
 }
