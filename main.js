@@ -236,7 +236,7 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.drawArrays(gl.LINE_STRIP, 0, vertices.length/2);
+  gl.drawArrays(gl.POINTS, 0, vertices.length/2);
 }
 
 doFrame();
