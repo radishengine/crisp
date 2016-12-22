@@ -207,7 +207,7 @@ for (var i = 2; i < shape.length; i += 6) {
   var c1x = shape[i], c1y = shape[i+1],
       c2x = shape[i+2], c2y = shape[i+3],
       endx = shape[i+4], endy = shape[i+5];
-  recursive_bezier(startx, startx, c1x, c1y, c2x, c2y, endx, endy, 0);
+  recursive_bezier(startx, starty, c1x, c1y, c2x, c2y, endx, endy, 0);
   startx = endx;
   startx = endy;
 }
