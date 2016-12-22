@@ -70,6 +70,7 @@ var curve_recursion_limit = 32;
 var curve_distance_epsilon = 1e-30;
 var curve_collinearity_epsilon = 1e-30;
 var curve_angle_tolerance_epsilon = 0.01;
+var m_distance_tolerance = 0.5;
 function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
   if (level > curve_recursion_limit) {
     return;
