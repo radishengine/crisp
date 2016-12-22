@@ -70,7 +70,7 @@ var curve_recursion_limit = 32;
 var curve_distance_epsilon = 1e-30;
 var curve_collinearity_epsilon = 1e-30;
 var curve_angle_tolerance_epsilon = 0.01;
-var m_distance_tolerance = 5;
+var m_distance_tolerance = 2;
 var m_angle_tolerance = 0.0;
 function vertex(x, y) {
   x = Math.floor(x);
