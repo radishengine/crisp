@@ -8,7 +8,7 @@ var fshader = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(vshader,''
 +'\n'+'attribute vec2 attVertexPos;'
 +'\n'+'void main() {'
-+'\n'+'  gl_Position = vec4(attVertexPos, 0, 2);'
++'\n'+'  gl_Position = vec4(attVertexPos, 0, 1);'
 +'\n'+'}'
 +'\n');
 gl.shaderSource(fshader, ''
