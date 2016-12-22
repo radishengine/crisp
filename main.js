@@ -32,7 +32,7 @@ var width = viewport[2], height = viewport[3];
 
 var vertices = [
   0, 0,
-  width, height];
+  width-1, height-1];
 
 var vertex_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
