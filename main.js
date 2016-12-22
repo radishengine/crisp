@@ -27,9 +27,12 @@ gl.attachShader(program, fshader);
 gl.linkProgram(program);
 gl.useProgram(program);
 
+var viewport = gl.getParameter(gl.VIEWPORT);
+var width = viewport[2], height = viewport[3];
+
 var vertices = [
   0, 0,
-  1, 1];
+  width, height];
 
 var vertex_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
@@ -41,8 +44,8 @@ gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
 
 var projectionMatrixUniform = gl.getUniformLocation(program, "projectionMatrix");
 gl.uniformMatrix4fv(projectionMatrixUniform, false, [
-  1,0,0,-1,
-  0,-1,0,1,
+  2 / width,0,0,-1 + (0.5 / width),
+  0,-2 / height,0,1 + (0.5 / height),
   0,0,0,0,
   0,0,0,1,
 ]);
