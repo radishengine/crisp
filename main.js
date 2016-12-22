@@ -41,7 +41,7 @@ gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
 
 var projectionMatrixUniform = gl.getUniformLocation(program, "projectionMatrix");
 gl.uniformMatrix4fv(projectionMatrixUniform, false, [
-  1,0,0,0,
+  1,0,0,-1,
   0,-1,0,0,
   0,0,0,0,
   0,0,0,1,
