@@ -7,8 +7,9 @@ var vshader = gl.createShader(gl.VERTEX_SHADER);
 var fshader = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(vshader,''
 +'\n'+'attribute vec2 attVertexPos;'
++'\n'+'uniform mat4 projectionMatrix;'
 +'\n'+'void main() {'
-+'\n'+'  gl_Position = vec4(attVertexPos, 0, 1);'
++'\n'+'  gl_Position = vec4(attVertexPos, 0, 1) * projectionMatrix;'
 +'\n'+'}'
 +'\n');
 gl.shaderSource(fshader, ''
@@ -37,6 +38,14 @@ gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
 var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
 gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
+
+var projectionMatrixUniform = gl.getUniformLocation(program, "projectionMatrix");
+gl.uniformMatrix4fv(projectionMatrixUniform, false, [
+  1,0,0,0,
+  0,1,0,0,
+  0,0,0,0,
+  0,0,0,1,
+]);
 
 gl.clearColor(0,0,0, 1);
 
