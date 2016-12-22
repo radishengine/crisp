@@ -209,7 +209,7 @@ for (var i = 2; i < shape.length; i += 6) {
       endx = shape[i+4], endy = shape[i+5];
   recursive_bezier(startx, starty, c1x, c1y, c2x, c2y, endx, endy, 0);
   startx = endx;
-  startx = endy;
+  starty = endy;
 }
 
 var vertex_buffer = gl.createBuffer();
