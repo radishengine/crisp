@@ -5,7 +5,7 @@ var gl = target.getContext('webgl', {antialias: false});
 
 var vshader = gl.createShader(gl.VERTEX_SHADER);
 var fshader = gl.createShader(gl.FRAGMENT_SHADER);
-gl.shaderSource(vshader,
+gl.shaderSource(vshader,''
 +'\n'+'attribute vec2 attVertexPos;'
 +'\n'+'void main() {'
 +'\n'+'  gl_Position = vec4(attVertexPos, 0, 2);'
