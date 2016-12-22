@@ -64,7 +64,7 @@ gl.useProgram(program);
 var viewport = gl.getParameter(gl.VIEWPORT);
 var width = viewport[2], height = viewport[3];
 
-var startx = shape[0], starty = shape[1];
+var startx = Math.floor(shape[0]), starty = Math.floor(shape[1]);
 var vertices = [startx, starty];
 var curve_recursion_limit = 32;
 var curve_distance_epsilon = 1e-30;
@@ -72,6 +72,13 @@ var curve_collinearity_epsilon = 1e-30;
 var curve_angle_tolerance_epsilon = 0.01;
 var m_distance_tolerance = 0.5;
 var m_angle_tolerance = 0.0;
+function vertex(x, y) {
+  x = Math.floor(x);
+  y = Math.floor(y);
+  var px = shape[shape.length-2], py = shape[shape.length-1];
+  console.log(x,y, px,py);
+  vertices.push(x, y);
+}
 function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
   if (level > curve_recursion_limit) {
     return;
@@ -104,7 +111,7 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
         // we tend to finish subdivisions.
         //----------------------
         if (m_angle_tolerance < curve_angle_tolerance_epsilon) {
-          vertices.push(x1234, y1234);
+          vertex(x1234, y1234);
           return;
         }
 
@@ -119,18 +126,18 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
         if (da1 + da2 < m_angle_tolerance) {
           // Finally we can stop the recursion
           //----------------------
-          vertices.push(x1234, y1234);
+          vertex(x1234, y1234);
           return;
         }
 
         if (m_cusp_limit != 0.0) {
           if (da1 > m_cusp_limit) {
-            vertices.push(x2, y2);
+            vertex(x2, y2);
             return;
           }
 
           if (da2 > m_cusp_limit) {
-            vertices.push(x3, y3);
+            vertex(x3, y3);
             return;
           }
         }
@@ -142,7 +149,7 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
           //----------------------
           if (d2 * d2 <= m_distance_tolerance * (dx*dx + dy*dy)) {
               if (m_angle_tolerance < curve_angle_tolerance_epsilon) {
-                vertices.push(x1234, y1234);
+                vertex(x1234, y1234);
                 return;
               }
 
@@ -152,12 +159,13 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
               if (da1 >= Math.pi) da1 = 2*Math.pi - da1;
 
               if (da1 < m_angle_tolerance) {
-                vertices.push(x2,y2, x3,y3);
+                vertex(x2,y2);
+                vertex(x3,y3);
                 return;
               }
 
               if (m_cusp_limit != 0.0 && da1 > m_cusp_limit) {
-                vertices.push(x2,y2);
+                vertex(x2,y2);
                 return;
               }
           }
@@ -167,7 +175,7 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
         //----------------------
         if (d3 * d3 <= m_distance_tolerance * (dx*dx + dy*dy)) {
           if (m_angle_tolerance < curve_angle_tolerance_epsilon) {
-            vertices.push(x1234, y1234);
+            vertex(x1234, y1234);
             return;
           }
 
@@ -177,12 +185,13 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
           if (da1 >= pi) da1 = 2*pi - da1;
 
           if (da1 < m_angle_tolerance) {
-            vertices.push(x2,y2, x3,y3);
+            vertex(x2,y2);
+            vertex(x3,y3);
             return;
           }
 
           if (m_cusp_limit !== 0.0 && da1 > m_cusp_limit) {
-            vertices.push(x3,y3);
+            vertex(x3,y3);
             return;
           }
         }
@@ -193,7 +202,7 @@ function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
         dx = x1234 - (x1 + x4) / 2;
         dy = y1234 - (y1 + y4) / 2;
         if (dx*dx + dy*dy <= m_distance_tolerance) {
-          vertices.push(x1234, y1234);
+          vertex(x1234, y1234);
           return;
         }
       }
