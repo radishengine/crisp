@@ -75,7 +75,7 @@ var m_angle_tolerance = 0.0;
 function vertex(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
-  var px = shape[shape.length-2], py = shape[shape.length-1];
+  var px = vertices[vertices.length-2], py = vertices[vertices.length-1];
   console.log(x,y, px,py);
   vertices.push(x, y);
 }
