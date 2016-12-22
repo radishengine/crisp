@@ -76,7 +76,7 @@ function vertex(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
   var px = vertices[vertices.length-2], py = vertices[vertices.length-1];
-  console.log(x,y, px,py);
+  console.log(px,py, x,y);
   vertices.push(x, y);
 }
 function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
