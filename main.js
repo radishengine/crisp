@@ -257,13 +257,13 @@ for (var i = 0; i < triangles.length; i += 3) {
   triverts.push(
     vertices[triangles[i * 3] * 2], vertices[triangles[i * 3] * 2 + 1],
     vertices[triangles[i*3 + 1] * 2], vertices[triangles[i*3 + 1] * 2 + 1],
-    vertices[triangles[i*3 + 2] * 2], vertices[triangles[i*3 + 2] * 2 + 1]
+    vertices[triangles[i*3 + 2] * 2], vertices[triangles[i*3 + 2] * 2 + 2]
   );
 }
 
-var vertex_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
+//var vertex_buffer = gl.createBuffer();
+//gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+//gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
   
 var trivert_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
@@ -310,7 +310,8 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.drawArrays(gl.LINES, 0, triverts.length/2);
+  gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
+  gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
 }
 
 doFrame();
