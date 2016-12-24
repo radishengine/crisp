@@ -1,4 +1,6 @@
 
+require(['earcut'], function(earcut) {
+
 var shape = [
   213,67,
   204,80, 186,76, 175,66,
@@ -247,10 +249,25 @@ for (var i = 2; i < shape.length; i += 6) {
 for (var i = 2; i < vertices.length; i+= 2) {
   console.log(vertices[i] - vertices[i-2], vertices[i+1] - vertices[i-1]);
 }
+  
+var triangles = earcut(vertices);
+  
+var triverts = [];
+for (var i = 0; i < triangles.length; i += 3) {
+  triverts.push(
+    vertices[triangles[i * 3] * 2], vertices[triangles[i * 3] * 2 + 1],
+    vertices[triangles[i*3 + 1] * 2], vertices[triangles[i*3 + 1] * 2 + 1],
+    vertices[triangles[i*3 + 2] * 2], vertices[triangles[i*3 + 2] * 2 + 1]
+  );
+}
 
 var vertex_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
+  
+var trivert_buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
+gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(triverts), gl.STATIC_DRAW);
 
 var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
@@ -293,7 +310,9 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/2);
+  gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
 }
 
 doFrame();
+
+});
