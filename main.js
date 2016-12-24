@@ -52,7 +52,7 @@ gl.shaderSource(fshader, 'precision mediump float;'
 +'\n'+'uniform sampler2D gradientSampler;'
 +'\n'+''
 +'\n'+'void main() {'
-+'\n'+'  gl_FragColor = texture2D(gradientSampler, gl_FragCoord * gradientMatrix);'
++'\n'+'  gl_FragColor = texture2D(gradientSampler, vec2(gl_FragCoord * gradientMatrix));'
 +'\n'+'}'
 +'\n');
 
