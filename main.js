@@ -47,7 +47,7 @@ gl.shaderSource(vshader,''
 +'\n'+'  gl_Position = vec4(attVertexPos, 0, 1) * projectionMatrix;'
 +'\n'+'}'
 +'\n');
-gl.shaderSource(fshader, ''
+gl.shaderSource(fshader, 'precision mediump float;'
 +'\n'+'uniform mat4 gradientMatrix;'
 +'\n'+'uniform sampler2D gradientSampler;'
 +'\n'+''
