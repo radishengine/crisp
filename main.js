@@ -232,7 +232,8 @@ for (var i = 2; i < vertices.length; i+= 2) {
 var vertex_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
-  
+
+/*
 var triangles = earcut(vertices);
   
 var triverts = [];
@@ -247,6 +248,7 @@ for (var i = 0; i < triangles.length; i += 3) {
 var trivert_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
 gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(triverts), gl.STATIC_DRAW);
+*/
 
 var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
@@ -291,13 +293,13 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.uniform4f(fixedColor_uniform, 1,0,0,1);
-  gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
-  gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
+  //gl.uniform4f(fixedColor_uniform, 1,0,0,1);
+  //gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
+  //gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
   
-  //gl.uniform4f(fixedColor_uniform, 0,1,0,1);
-  //gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-  //gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/2);
+  gl.uniform4f(fixedColor_uniform, 0,1,0,1);
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+  gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/2);
 }
 
 doFrame();
