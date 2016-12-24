@@ -82,29 +82,7 @@ var m_angle_tolerance = 0.0;
 function vertex(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
-  var px = vertices[vertices.length-2], py = vertices[vertices.length-1];
-  var lpx = vertices[vertices.length-4], lpy = vertices[vertices.length-3];
-  var dx = x - px, dy = y - py;
-  var ldx = px - lpx, ldy = py - lpy;
-  if ((ldx === 0 && dx === 0) || (ldy === 0 && dy === 0)) {
-    vertices[vertices.length-2] = x;
-    vertices[vertices.length-1] = y;
-  }
-  else if (Math.sign(ldx) === Math.sign(dx)
-  && Math.sign(ldy) === Math.sign(dy)
-  && (
-    (ldx >= dx && !(ldx % dx))
-    || (ldx < dx && !(dx % ldx)))
-  && (
-    (ldy >= dy && !(ldy % dy))
-    || (ldy < dy && !(dy % ldy))
-  )) {
-    vertices[vertices.length-2] = x;
-    vertices[vertices.length-1] = y;
-  }
-  else {
-    vertices.push(x, y);
-  }
+  vertices.push(x, y);
 }
 function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
   if (level > curve_recursion_limit) {
@@ -251,6 +229,10 @@ for (var i = 2; i < vertices.length; i+= 2) {
   console.log(vertices[i] - vertices[i-2], vertices[i+1] - vertices[i-1]);
 }
 
+var vertex_buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
+  
 var triangles = earcut(vertices);
   
 var triverts = [];
@@ -262,10 +244,6 @@ for (var i = 0; i < triangles.length; i += 3) {
   );
 }
 
-var vertex_buffer = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
-  
 var trivert_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
 gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(triverts), gl.STATIC_DRAW);
