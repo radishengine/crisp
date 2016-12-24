@@ -249,7 +249,7 @@ for (var i = 2; i < shape.length; i += 6) {
 for (var i = 2; i < vertices.length; i+= 2) {
   console.log(vertices[i] - vertices[i-2], vertices[i+1] - vertices[i-1]);
 }
-  
+vertices = shape;
 var triangles = earcut(vertices);
   
 var triverts = [];
