@@ -282,7 +282,7 @@ function createGradientTexture(r, g, b, a, r2,g2,b2,a2) {
   return texture;
 }
 
-gl.uniform1i(getUniformLocation(program, "gradientSampler"), 6);
+gl.uniform1i(gl.getUniformLocation(program, "gradientSampler"), 6);
 gl.activeTexture(gl.TEXTURE6);
 gl.bindTexture(gl.TEXTURE_2D, createGradientTexture(255,0,0,255, 0,255,0,255));
 
