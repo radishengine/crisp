@@ -65,7 +65,7 @@ var viewport = gl.getParameter(gl.VIEWPORT);
 var width = viewport[2], height = viewport[3];
 
 var startx = Math.floor(shape[0]), starty = Math.floor(shape[1]);
-var vertices = [startx, starty];
+var vertices = [startx, starty, startx, starty];
 var curve_recursion_limit = 32;
 var curve_distance_epsilon = 1e-30;
 var curve_collinearity_epsilon = 1e-30;
@@ -76,9 +76,23 @@ function vertex(x, y) {
   x = Math.floor(x);
   y = Math.floor(y);
   var px = vertices[vertices.length-2], py = vertices[vertices.length-1];
+  var lpx = vertices[vertices.length-4], lpy = vertices[vertices.length-3];
   var dx = x - px, dy = y - py;
-  console.log(dx, dy);
-  vertices.push(x, y);
+  var ldx = px - lpx, ldy = py - lpy;
+  if (Math.sign(ldx) === Math.sign(dx)
+  && Math.sign(ldy) === Math.sign(dy)
+  && (
+    (ldx >= dx && !(ldx % dx))
+    || (ldx < dx && !(dx % ldx))
+    || (ldy >= dy && !(ldy % dy))
+    || (ldy < dy && !(dy % ldy))
+  )) {
+    vertices[vertices.length-2] = px;
+    vertices[vertices.length-1] = py;
+  }
+  else {
+    vertices.push(x, y);
+  }
 }
 function recursive_bezier(x1,y1, x2,y2, x3,y3, x4,y4, level) {
   if (level > curve_recursion_limit) {
@@ -220,6 +234,9 @@ for (var i = 2; i < shape.length; i += 6) {
   recursive_bezier(startx, starty, c1x, c1y, c2x, c2y, endx, endy, 0);
   startx = endx;
   starty = endy;
+}
+for (var i = 0; i < vertices.length; i+= 2) {
+  console.log(vertices[i], vertices[i+1]);
 }
 
 var vertex_buffer = gl.createBuffer();
