@@ -250,7 +250,6 @@ gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(triverts), gl.STATIC_DRAW);
 
 var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
-gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
 
 gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, [
   2 / width,0,0,-1 + (0.5 / width),
@@ -293,10 +292,12 @@ function doFrame() {
   
   //gl.uniform4f(fixedColor_uniform, 1,0,0,1);
   //gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
+  //gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
   //gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
   
   gl.uniform4f(fixedColor_uniform, 0,1,0,1);
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+  gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
   gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/2);
 }
 
