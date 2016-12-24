@@ -83,8 +83,9 @@ function vertex(x, y) {
   && Math.sign(ldy) === Math.sign(dy)
   && (
     (ldx >= dx && !(ldx % dx))
-    || (ldx < dx && !(dx % ldx))
-    || (ldy >= dy && !(ldy % dy))
+    || (ldx < dx && !(dx % ldx)))
+  && (
+    (ldy >= dy && !(ldy % dy))
     || (ldy < dy && !(dy % ldy))
   )) {
     vertices[vertices.length-2] = x;
