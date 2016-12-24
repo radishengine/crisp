@@ -291,9 +291,9 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.uniform4f(fixedColor_uniform, 1,0,0,1);
-  gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
-  gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
+  //gl.uniform4f(fixedColor_uniform, 1,0,0,1);
+  //gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
+  //gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
   
   gl.uniform4f(fixedColor_uniform, 0,1,0,1);
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
