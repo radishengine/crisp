@@ -52,9 +52,10 @@ gl.shaderSource(vshader,''
 gl.shaderSource(fshader, 'precision mediump float;'
 +'\n'+'uniform mat4 gradientMatrix;'
 +'\n'+'uniform sampler2D gradientSampler;'
++'\n'+'uniform vec4 fixedColor;'
 +'\n'+''
 +'\n'+'void main() {'
-+'\n'+'  gl_FragColor = texture2D(gradientSampler, vec2(gl_FragCoord * gradientMatrix));'
++'\n'+'  gl_FragColor = fixedColor;' // texture2D(gradientSampler, vec2(gl_FragCoord * gradientMatrix));'
 +'\n'+'}'
 +'\n');
 
@@ -261,9 +262,9 @@ for (var i = 0; i < triangles.length; i += 3) {
   );
 }
 
-//var vertex_buffer = gl.createBuffer();
-//gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-//gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
+var vertex_buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(vertices), gl.STATIC_DRAW);
   
 var trivert_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
@@ -286,6 +287,8 @@ gl.uniformMatrix4fv(gl.getUniformLocation(program, "gradientMatrix"), false, [
   0,0,0,0,
   0,0,0,1,
 ]);
+  
+var fixedColor_uniform = gl.getUniformLocation(program, 'fixedColor');
 
 function createGradientTexture(r, g, b, a, r2,g2,b2,a2) {
   var data = new Uint8Array([r,g,b,a, r2,g2,b2,a2]);
@@ -310,8 +313,13 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
+  gl.uniform4f(fixedColor_uniform, 1,0,0,1);
   gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
   gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
+  
+  gl.uniform4f(fixedColor_uniform, 0,1,0,1);
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+  gl.drawArrays(gl.TRIANGLES, 0, vertices.length/2);
 }
 
 doFrame();
