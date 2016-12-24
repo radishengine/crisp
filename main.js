@@ -79,7 +79,11 @@ function vertex(x, y) {
   var lpx = vertices[vertices.length-4], lpy = vertices[vertices.length-3];
   var dx = x - px, dy = y - py;
   var ldx = px - lpx, ldy = py - lpy;
-  if (Math.sign(ldx) === Math.sign(dx)
+  if ((ldx === 0 && dx === 0) || (ldy === 0 && dy === 0)) {
+    vertices[vertices.length-2] = x;
+    vertices[vertices.length-1] = y;
+  }
+  else if (Math.sign(ldx) === Math.sign(dx)
   && Math.sign(ldy) === Math.sign(dy)
   && (
     (ldx >= dx && !(ldx % dx))
