@@ -255,9 +255,9 @@ var triangles = earcut(vertices);
 var triverts = [];
 for (var i = 0; i < triangles.length; i += 3) {
   triverts.push(
-    vertices[triangles[i * 3] * 2], vertices[triangles[i * 3] * 2 + 1],
-    vertices[triangles[i*3 + 1] * 2], vertices[triangles[i*3 + 1] * 2 + 1],
-    vertices[triangles[i*3 + 2] * 2], vertices[triangles[i*3 + 2] * 2 + 2]
+    vertices[triangles[i] * 2], vertices[triangles[i] * 2 + 1],
+    vertices[triangles[i + 1] * 2], vertices[triangles[i + 1] * 2 + 1],
+    vertices[triangles[i + 2] * 2], vertices[triangles[i + 2] * 2 + 1]
   );
 }
 
