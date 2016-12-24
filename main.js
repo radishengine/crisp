@@ -42,13 +42,17 @@ var fshader = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(vshader,''
 +'\n'+'attribute vec2 attVertexPos;'
 +'\n'+'uniform mat4 projectionMatrix;'
++'\n'+''
 +'\n'+'void main() {'
 +'\n'+'  gl_Position = vec4(attVertexPos, 0, 1) * projectionMatrix;'
 +'\n'+'}'
 +'\n');
 gl.shaderSource(fshader, ''
++'\n'+'uniform mat4 gradientMatrix;'
++'\n'+'uniform sampler2D gradientSampler;'
++'\n'+''
 +'\n'+'void main() {'
-+'\n'+'  gl_FragColor = vec4(1, 1, 1, 1);'
++'\n'+'  gl_FragColor = texture2D(gradientSampler, gl_FragCoord * gradientMatrix);'
 +'\n'+'}'
 +'\n');
 
@@ -252,13 +256,35 @@ var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
 gl.vertexAttribPointer(vertexPositionAttribute, 2, gl.FLOAT, false, 0, 0);
 
-var projectionMatrixUniform = gl.getUniformLocation(program, "projectionMatrix");
-gl.uniformMatrix4fv(projectionMatrixUniform, false, [
+gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, [
   2 / width,0,0,-1 + (0.5 / width),
   0,-2 / height,0,1 - (0.5 / height),
   0,0,0,0,
   0,0,0,1,
 ]);
+
+gl.uniformMatrix4fv(gl.getUniformLocation(program, "gradientMatrix"), false, [
+  1,0,0,0,
+  0,1,0,0,
+  0,0,0,0,
+  0,0,0,1,
+]);
+
+function createGradientTexture(r, g, b, a, r2,g2,b2,a2) {
+  var data = new Uint8Array([r,g,b,a, r2,g2,b2,a2]);
+  var texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  return texture;
+}
+
+gl.uniform1i(getUniformLocation(program, "gradientSampler"), 6);
+gl.activeTexture(gl.TEXTURE6);
+gl.bindTexture(gl.TEXTURE_2D, createGradientTexture(255,0,0,255, 0,255,0,255));
 
 gl.clearColor(0,0,0, 1);
 
