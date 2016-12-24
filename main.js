@@ -236,8 +236,8 @@ for (var i = 2; i < shape.length; i += 6) {
   startx = endx;
   starty = endy;
 }
-for (var i = 0; i < vertices.length; i+= 2) {
-  console.log(vertices[i], vertices[i+1]);
+for (var i = 2; i < vertices.length; i+= 2) {
+  console.log(vertices[i] - vertices[i-2], vertices[i+1] - vertices[i-1]);
 }
 
 var vertex_buffer = gl.createBuffer();
