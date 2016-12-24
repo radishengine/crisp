@@ -264,7 +264,7 @@ gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, [
 ]);
 
 gl.uniformMatrix4fv(gl.getUniformLocation(program, "gradientMatrix"), false, [
-  1,0,0,0,
+  1/width,0,0,0,
   0,1,0,0,
   0,0,0,0,
   0,0,0,1,
