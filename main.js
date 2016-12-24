@@ -87,8 +87,8 @@ function vertex(x, y) {
     || (ldy >= dy && !(ldy % dy))
     || (ldy < dy && !(dy % ldy))
   )) {
-    vertices[vertices.length-2] = px;
-    vertices[vertices.length-1] = py;
+    vertices[vertices.length-2] = x;
+    vertices[vertices.length-1] = y;
   }
   else {
     vertices.push(x, y);
