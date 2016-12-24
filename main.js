@@ -319,7 +319,7 @@ function doFrame() {
   
   gl.uniform4f(fixedColor_uniform, 0,1,0,1);
   gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-  gl.drawArrays(gl.TRIANGLES, 0, vertices.length/2);
+  gl.drawArrays(gl.LINE_LOOP, 0, vertices.length/2);
 }
 
 doFrame();
