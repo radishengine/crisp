@@ -286,7 +286,7 @@ gl.uniform1i(gl.getUniformLocation(program, "gradientSampler"), 6);
 gl.activeTexture(gl.TEXTURE6);
 gl.bindTexture(gl.TEXTURE_2D, createGradientTexture(0,0,0,255, 255,255,255,255));
 
-gl.clearColor(0,0,0, 1);
+gl.clearColor(0,0,0.2, 1);
 
 function doFrame() {
   requestAnimationFrame(doFrame);
