@@ -244,11 +244,9 @@ for (var i = 0; i < triangles.length; i += 3) {
   );
 }
 
-/*
 var trivert_buffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, trivert_buffer);
 gl.bufferData(gl.ARRAY_BUFFER, Float32Array.from(triverts), gl.STATIC_DRAW);
-*/
 
 var vertexPositionAttribute = gl.getAttribLocation(program, "attVertexPos");
 gl.enableVertexAttribArray(vertexPositionAttribute);
