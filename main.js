@@ -310,7 +310,7 @@ function doFrame() {
   
   gl.clear(gl.COLOR_BUFFER_BIT);
   
-  gl.drawArrays(gl.TRIANGLES, 0, triverts.length/2);
+  gl.drawArrays(gl.LINES, 0, triverts.length/2);
 }
 
 doFrame();
