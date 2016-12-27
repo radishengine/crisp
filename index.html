@@ -15,8 +15,19 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%) scale(2);
+      overflow: hidden;
     }
-    @media (max-width:639px) and (max-height:479px) {
+    @media (max-width:320px) {
+      #target {
+        left: 0;
+      }
+    }
+    @media (max-height:200px) {
+      #target {
+        top: 0;
+      }
+    }
+    @media (max-width:639px) and (max-height:399px) {
       #target {
         transform: translate(-50%, -50%) scale(1);
       }
