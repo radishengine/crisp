@@ -37,7 +37,7 @@ var shape = [
 
 var target = document.getElementById('target');
 
-var gl = target.getContext('webgl', {antialias: false});
+var gl = target.getContext('webgl', {antialias: false}) || target.getContext("experimental-webgl");
 
 var vshader = gl.createShader(gl.VERTEX_SHADER);
 var fshader = gl.createShader(gl.FRAGMENT_SHADER);
