@@ -5,10 +5,41 @@
   <title>crisp</title>
   <script type='text/javascript' src='require.js' data-main='main.js'></script>
   <style type='text/css'>
+    body {
+      background: black;
+    }
     #target {
       image-rendering: crisp-edges;
       image-rendering: pixelated;
+      position: absolute;
+      left: 50%;
+      top: 50%;
       transform: translate(50%, 50%) scale(2);
+    }
+    @media (max-width:639px) and (max-height:479px) {
+      #target {
+        transform: translate(50%, 50%) scale(1);
+      }
+    }
+    @media (min-width:960px) and (min-height:600px) {
+      #target {
+        transform: translate(50%, 50%) scale(3);
+      }
+    }
+    @media (min-width:1280px) and (min-height:800px) {
+      #target {
+        transform: translate(50%, 50%) scale(4);
+      }
+    }
+    @media (min-width:1600px) and (min-height:1000px) {
+      #target {
+        transform: translate(50%, 50%) scale(5);
+      }
+    }
+    @media (min-width:1920px) and (min-height:1200px) {
+      #target {
+        transform: translate(50%, 50%) scale(6);
+      }
     }
   </style>
 </head>
