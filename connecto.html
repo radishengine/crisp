@@ -9,8 +9,21 @@ document.addEventListener('DOMContentLoaded', function(e) {
   var drawing = document.getElementById('drawing');
   var shape1 = document.getElementById('shape1');
   var shape2 = document.getElementById('shape2');
+  shape1.x = shape1.y = shape2.x = shape2.y = 0;
+  function update() {
+    var ang = Math.atan2(shape2.y - shape1.y, shape2.x - shape1.x);
+    shape1.setAttribute('transform', 'rotate(' + ang + ') translate(' + shape1.x + ',' + shape1.y + ')');
+    shape2.setAttribute('transform', 'rotate(' + ang + ') translate(' + shape2.x + ',' + shape2.y + ')');
+  }
   drawing.addEventListener('mousemove', function(e) {
-    shape2.setAttribute('transform', 'translate(' + e.clientX + ',' + e.clientY + ')');
+    shape2.x = e.clientX;
+    shape2.y = e.clientY;
+    update();
+  });
+  drawing.addEventListener('click', function(e) {
+    shape1.x = e.clientX;
+    shape1.y = e.clientY;
+    update();
   });
 });
 
