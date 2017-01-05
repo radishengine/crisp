@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
   shape1.x = shape1.y = shape2.x = shape2.y = 0;
   function update() {
     var ang = Math.atan2(shape2.y - shape1.y, shape2.x - shape1.x);
-    shape1.setAttribute('transform', 'translate(' + shape1.x + ',' + shape1.y + ') rotate(' + (ang * (180 / Math.PI)) + ')');
-    shape2.setAttribute('transform', 'translate(' + shape2.x + ',' + shape2.y + ') rotate(' + (ang * (180 / Math.PI)) + ')');
+    shape1.setAttribute('transform', 'translate(' + shape1.x + ',' + shape1.y + ') rotate(' + ((ang * (180 / Math.PI)) - 90) + ')');
+    shape2.setAttribute('transform', 'translate(' + shape2.x + ',' + shape2.y + ') rotate(' + ((ang * (180 / Math.PI)) - 90) + ')');
   }
   drawing.addEventListener('mousemove', function(e) {
     shape2.x = e.clientX;
